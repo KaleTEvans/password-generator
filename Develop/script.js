@@ -12,9 +12,10 @@
 //    3b. Loop the function between 8 and 128 times based on user input
 // 4. Display new user password in page via html
 
+var charUpper = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
 // password character input funciton
-var characterLength = function() {
+var charLength = function() {
 
   var promptCharacterNumber = window.prompt("How many characters in length would you like your password to be? Choose amywhere from 8 up to 128.");
 
@@ -27,9 +28,50 @@ var characterLength = function() {
   else {
     //restart funciton if answer is invalid
     window.alert("Your selection is invalid! Please choose a number between 8 and 128.");
-    return characterLength();
+    return charLength();
   }
-}
+};
+
+// character type input function to determine array size for character generator
+var charType = function() {
+  
+  // declare array variable locally
+  var charTypeNumber = [];
+  var i = 0;
+  console.log(charTypeNumber);
+
+  // ask if user wants upper case
+  var upperConfirm = window.confirm("Would you like to use upper case letters?");
+
+  if (upperConfirm) {
+    i++;
+  }
+
+  // ask if user wants lower case
+  var lowerConfirm = window.confirm("Would you like to use lower case characters?");
+
+  if (lowerConfirm) {
+    i++;
+  }
+
+  // ask if the user wants numbers
+  var numberConfirm = window.confirm("Would you like to use numbers?");
+
+  if (numberConfirm) {
+    i++;
+  }
+
+  // ask if the user wants special characters
+  var specialConfirm = window.confirm("Would you like to use special characters?")
+
+  if (specialConfirm) {
+    i++;
+  }
+
+  charTypeNumber.length = i;
+  console.log(charTypeNumber);
+
+};
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -41,7 +83,10 @@ function writePassword() {
   window.alert("Hello! Please continue to select your preferred criteria for a uniquely generated password.");
 
   // call function for password character input
-  characterLength();
+  charLength();
+
+  // call function for character type array
+  charType();
 
   /* var password = generatePassword();
   var passwordText = document.querySelector("#password");
