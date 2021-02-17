@@ -19,8 +19,8 @@ var charLower = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'
 var charSpecial = [' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', , "]", '^', '_', '`', '{', '|', '}', '~'];
 var charNumber = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-// password character array
-var characterArray = [charUpper, charLower, charSpecial, charNumber];
+// character type array
+var charTypeArray = [];
 
 // password character input funciton
 var charLength = function() {
@@ -43,16 +43,15 @@ var charLength = function() {
 // character type input function to determine array size for character generator and character types
 var charType = function() {
   
-  // declare array variable locally
-  var charTypeNumber = [];
+  // use i variable to track user selected character types
   var i = 0;
-  console.log(charTypeNumber);
+  console.log(charTypeArray);
 
   // ask if user wants upper case
   var upperConfirm = window.confirm("Would you like to use upper case letters?");
 
   if (upperConfirm) {
-    charTypeNumber[i] = charUpper;
+    charTypeArray[i] = charUpper;
     i++;
   }
 
@@ -60,7 +59,7 @@ var charType = function() {
   var lowerConfirm = window.confirm("Would you like to use lower case characters?");
 
   if (lowerConfirm) {
-    charTypeNumber[i] = charLower;
+    charTypeArray[i] = charLower;
     i++;
   }
 
@@ -68,7 +67,7 @@ var charType = function() {
   var numberConfirm = window.confirm("Would you like to use numbers?");
 
   if (numberConfirm) {
-    charTypeNumber[i] = charNumber;
+    charTypeArray[i] = charNumber;
     i++;
   }
 
@@ -76,20 +75,35 @@ var charType = function() {
   var specialConfirm = window.confirm("Would you like to use special characters?")
 
   if (specialConfirm) {
-    charTypeNumber[i] = charSpecial;
+    charTypeArray[i] = charSpecial;
     i++;
   }
 
-  charTypeNumber.length = i;
-  console.log(charTypeNumber);
+  console.log(charTypeArray);
 
-// rerstart function if no options are chosen
+  // rerstart function if no options are chosen
   if ((upperConfirm === false) && (lowerConfirm === false) && (numberConfirm === false) && (specialConfirm === false)) {
     window.alert("Sorry! You must pick at least one character type.");
     return charType();
   }
 
 };
+
+// funciton to merge chosen characters into a single array and pick a random value
+var randomCharGenerator = function() {
+
+  var selectedCharacters = [].concat.apply([], charTypeArray);
+  console.log(selectedCharacters);
+
+  // now select a random character from the array
+  var randomValue = Math.floor(Math.random() * (selectedCharacters.length + 1));
+
+  var passwordChar = selectedCharacters[randomValue];
+
+  console.log(passwordChar);
+  return passwordChar;
+
+}
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -105,6 +119,8 @@ function writePassword() {
 
   // call function for character type array
   charType();
+
+  randomCharGenerator();
 
   /* var password = generatePassword();
   var passwordText = document.querySelector("#password");
