@@ -122,8 +122,10 @@ function writePassword() {
   // call function for password character input
   charLength();
 
-  // reset character type array upon funciton call
+  // reset character type array and password array upon funciton call
   charTypeArray = [];
+  passwordArray = [];
+
   // call function for character type array
   charType();
 
