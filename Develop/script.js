@@ -12,7 +12,15 @@
 //    3b. Loop the function between 8 and 128 times based on user input
 // 4. Display new user password in page via html
 
+// declaring password variable arrays
 var charUpper = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+var charLower = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+// special char array size is 33
+var charSpecial = [' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', , "]", '^', '_', '`', '{', '|', '}', '~'];
+var charNumber = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+// password character array
+var characterArray = [charUpper, charLower, charSpecial, charNumber];
 
 // password character input funciton
 var charLength = function() {
@@ -32,7 +40,7 @@ var charLength = function() {
   }
 };
 
-// character type input function to determine array size for character generator
+// character type input function to determine array size for character generator and character types
 var charType = function() {
   
   // declare array variable locally
@@ -44,6 +52,7 @@ var charType = function() {
   var upperConfirm = window.confirm("Would you like to use upper case letters?");
 
   if (upperConfirm) {
+    charTypeNumber[i] = charUpper;
     i++;
   }
 
@@ -51,6 +60,7 @@ var charType = function() {
   var lowerConfirm = window.confirm("Would you like to use lower case characters?");
 
   if (lowerConfirm) {
+    charTypeNumber[i] = charLower;
     i++;
   }
 
@@ -58,6 +68,7 @@ var charType = function() {
   var numberConfirm = window.confirm("Would you like to use numbers?");
 
   if (numberConfirm) {
+    charTypeNumber[i] = charNumber;
     i++;
   }
 
@@ -65,11 +76,18 @@ var charType = function() {
   var specialConfirm = window.confirm("Would you like to use special characters?")
 
   if (specialConfirm) {
+    charTypeNumber[i] = charSpecial;
     i++;
   }
 
   charTypeNumber.length = i;
   console.log(charTypeNumber);
+
+// rerstart function if no options are chosen
+  if ((upperConfirm === false) && (lowerConfirm === false) && (numberConfirm === false) && (specialConfirm === false)) {
+    window.alert("Sorry! You must pick at least one character type.");
+    return charType();
+  }
 
 };
 
