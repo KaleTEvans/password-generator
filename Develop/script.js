@@ -16,22 +16,27 @@
 var charUpper = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 var charLower = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 // special char array size is 33
-var charSpecial = [' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', , "]", '^', '_', '`', '{', '|', '}', '~'];
+var charSpecial = [' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', "]", '^', '_', '`', '{', '|', '}', '~'];
 var charNumber = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 // character type array
 var charTypeArray = [];
 
+// password character length global variable
+var promptCharacterNumber;
+
+var passwordArray = [];
+
 // password character input funciton
 var charLength = function() {
 
-  var promptCharacterNumber = window.prompt("How many characters in length would you like your password to be? Choose amywhere from 8 up to 128.");
+  promptCharacterNumber = window.prompt("How many characters in length would you like your password to be? Choose amywhere from 8 up to 128.");
 
   // check to see if number is within range
   if ((promptCharacterNumber >= 8) && (promptCharacterNumber <= 128)) {
     // return true if number is within range
     console.log("password length is " + promptCharacterNumber);
-    return true;
+    return promptCharacterNumber;
   }
   else {
     //restart funciton if answer is invalid
@@ -93,10 +98,11 @@ var charType = function() {
 var randomCharGenerator = function() {
 
   var selectedCharacters = [].concat.apply([], charTypeArray);
-  console.log(selectedCharacters);
+  // console.log(selectedCharacters);
 
   // now select a random character from the array
-  var randomValue = Math.floor(Math.random() * (selectedCharacters.length + 1));
+  var randomValue = Math.floor(Math.random() * (selectedCharacters.length));
+  // console.log(randomValue);
 
   var passwordChar = selectedCharacters[randomValue];
 
@@ -120,12 +126,19 @@ function writePassword() {
   // call function for character type array
   charType();
 
-  randomCharGenerator();
+  // run for loop to generate the password
+  for (var i = 0; i <= promptCharacterNumber; i++) {
+    passwordArray[i] = randomCharGenerator();
+    // randomCharGenerator();
+  }
 
-  /* var password = generatePassword();
+  var password = passwordArray.join("");
+  console.log(password);
+
+  // var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
-  passwordText.value = password; */
+  passwordText.value = password; 
 
 
 } 
